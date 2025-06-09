@@ -9,7 +9,10 @@
 
 /* #NUMBERS */
 #numbers-list {
-	font-size: 3rem;
+	font-size: 2rem;
+	color: red;
+	background-color: beige;
+	padding: 10px;
 }
 
 input {
