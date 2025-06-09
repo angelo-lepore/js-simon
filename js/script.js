@@ -1,6 +1,8 @@
 /* Visualizzare in pagina 5 numeri casuali. Da lì parte un timer di 30 secondi. Dopo 30 secondi i numeri scompaiono e appaiono invece 5 input in cui l'utente deve inserire i numeri che ha visto precedentemente, nell'ordine che preferisce.
 Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati. */
 
+alert("Hai 30 secondi di tempo per memorizzare 5 numeri");
+
 // creo un'array per memorizzare i numeri casuali
 const numeri_casuali = [];
 
@@ -57,5 +59,40 @@ function countdown(duration, display) {
 let duration = 30;
 countdown(duration, display);
 
-// creo un'array per memorizzare i numeri dell'utente
-const numeri_utente = [];
+// mi preparo a leggere i dati dal form
+const inputGroupEl = document.getElementById("input-group");
+const inputsEl = inputGroupEl.querySelectorAll("input");
+const answerFormEl = document.getElementById("answers-form");
+const messageEl = document.getElementById("message");
+const tastoResetEl = document.querySelector(".tasto_reset");
+
+answerFormEl.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  //* creo una variabile per il punteggio dell'utente
+  let punteggio_utente = 0;
+  //* creo un array vuoto per i numeri dell'utente
+  const numeri_utente = [];
+
+  //* creo un ciclo for per pushare i numeri dentro l'array
+  for (let i = 0; i < inputsEl.length; i++) {
+    numeri_utente.push(Number(inputsEl[i].value));
+  }
+
+  //* creo un ciclo for per verificare quanti numeri dell'array sono presenti nei numeri casuali
+  for (let i = 0; i < numeri_casuali.length; i++) {
+    if (numeri_utente.includes(numeri_casuali[i])) {
+      punteggio_utente++;
+    }
+  }
+  // calcolo il punteggio dell'utente
+  if (punteggio_utente > 0) {
+    console.log("Hai memorizzato " + punteggio_utente + " numeri!");
+    messageEl.innerText = "Hai memorizzato " + punteggio_utente + " numeri!";
+  } else {
+    messageEl.innerText = "Hai sbagliato tutti i numeri!";
+  }
+});
+
+// tasto reset
+tastoResetEl.addEventListener("click", () => location.reload());
