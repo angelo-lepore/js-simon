@@ -17,3 +17,7 @@
 input {
 	width: 80px !important;
 }
+
+#button {
+	display: flex;
+}

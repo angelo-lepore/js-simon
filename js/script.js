@@ -71,10 +71,11 @@ answerFormEl.addEventListener("submit", (e) => {
 
   //* creo una variabile per il punteggio dell'utente
   let punteggio_utente = 0;
+
   //* creo un array vuoto per i numeri dell'utente
   const numeri_utente = [];
 
-  //* creo un ciclo for per pushare i numeri dentro l'array
+  //* creo un ciclo for per pushare i numeri dentro l'array e verificare quanti numeri sono presenti nei numeri casuali
   for (let i = 0; i < inputsEl.length; i++) {
     numeri_utente.push(Number(inputsEl[i].value));
   }
@@ -85,11 +86,14 @@ answerFormEl.addEventListener("submit", (e) => {
       punteggio_utente++;
     }
   }
+  console.log(numeri_utente);
+
   // calcolo il punteggio dell'utente
   if (punteggio_utente > 0) {
     console.log("Hai memorizzato " + punteggio_utente + " numeri!");
     messageEl.innerText = "Hai memorizzato " + punteggio_utente + " numeri!";
   } else {
+    console.log("Hai sbagliato tutti i numeri!");
     messageEl.innerText = "Hai sbagliato tutti i numeri!";
   }
 });
